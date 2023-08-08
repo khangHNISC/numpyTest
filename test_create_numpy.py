@@ -5,10 +5,13 @@ from numpy import dtype
 from parameterized import parameterized
 
 
-class TestMathUnitTest(unittest.TestCase):
+class TestCreateNumpy(unittest.TestCase):
     @parameterized.expand([
-        ("1", np.zeros(2), dtype('float64'), 1),
+        ("t1", np.zeros(2), dtype('float64'), 1, (2,), 2),
+        ("t2", np.ones(3, dtype=np.int32), dtype('int32'), 1, (3,), 3),
     ])
-    def test_type(self, name, ar, ar_dtype, ar_ndim):
-        self.assertEqual(ar.dtype, ar_dtype)
-        self.assertEqual(ar.ndim, ar_ndim)
+    def test_type(self, name, ar, dtype, ndim, shape, size):
+        self.assertEqual(ar.dtype, dtype, "number " + name)
+        self.assertEqual(ar.ndim, ndim, "number " + name)
+        self.assertEqual(ar.shape, shape, "number " + name)
+        self.assertEqual(ar.size, size, "number " + name)
